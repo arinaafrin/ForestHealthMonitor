@@ -1,0 +1,16 @@
+services:
+  forest_database:
+    image: postgis/postgis:16-3.4
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: forest
+      POSTGRES_PASSWORD: forest
+      POSTGRES_DB: forest_health
+    ports:
+      - "5432:5432"
+    volumes:
+      # keeps data safe after restart
+      - forest_db_data:/var/lib/postgresql/data 
+
+volumes:
+  forest_db_data:
