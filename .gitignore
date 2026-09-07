@@ -16,8 +16,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
-lib64/
 parts/
 sdist/
 var/
@@ -29,6 +27,7 @@ share/python-wheels/
 MANIFEST
 
 # Virtual environments
+.venv/
 venv/
 env/
 ENV/
@@ -56,7 +55,7 @@ venv.bak/
 .coverage
 .coverage.*
 htmlcov/
-.rspec
+robot_results/
 
 # Docker logs & data mounts
 *.log
@@ -66,11 +65,8 @@ docker-data/
 .DS_Store
 Thumbs.db
 
-# Inside Credentials Folder
+# Credentials
 credentials/
-*.json
-!.eslintrc.json
-!package.json
 
 # ----------------- Frontend specific ------------------
 
@@ -93,9 +89,3 @@ frontend/.next/
 frontend/*.patch
 frontend/*.log
 frontend/.eslintcache
-
-# Lockfile Safeguards
-frontend/package-lock.json
-frontend/pnpm-lock.yaml
-
-

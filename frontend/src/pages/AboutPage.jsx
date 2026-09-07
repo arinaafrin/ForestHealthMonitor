@@ -36,7 +36,7 @@ export default function AboutPage() {
                     <p className="text-gray-700">
                         A user draws a boundary around a section of forest and picks the last 3
                         months. The app pulls Sentinel-2 satellite images for that area and date
-                        range, calculates four vegetation scores, and returns a status — Healthy,
+                        range, calculates four vegetation scores, and returns a status: Healthy,
                         Moderate Stress, or Severe Stress; along with a trend chart showing how
                         those scores have changed over past checks. A conservation team could use
                         this to catch early signs of drought stress or illegal logging without ever
