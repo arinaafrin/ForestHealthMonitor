@@ -38,7 +38,7 @@ def calculate_canopy_density(nir: np.ndarray, red: np.ndarray, blue: np.ndarray)
     denominator = nir + red_weight * red - blue_weight * blue + soil_adjustment  
     return gain * (nir - red) / (denominator + _EPS) 
 
-def summarize_all_health_indicates(bands: dict[str, np.ndarray]) -> dict[str, float]:
+def summarize_all_health_indices(bands: dict[str, np.ndarray]) -> dict[str, float]:
     # Processes raw bands into index scores, returning a clean summary dictionary ready for database storage
     return {
         "greenness": float(np.mean(calculate_vegetation_greenness(bands["nir"], bands["red"]))),

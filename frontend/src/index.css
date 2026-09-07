@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Leaflet needs an explicit height on its container or the map renders as 0px tall */
+.leaflet-map-container {
+  height: 380px;
+  border-radius: 0.5rem;
+}

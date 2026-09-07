@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.11.9 on win32)" generated="2026-09-02T15:42:55.994318" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot" source="C:\xampp\htdocs\forest-health-monitor\tests\robot">
+<suite id="s1-s1" name="Region Api Tests" source="C:\xampp\htdocs\forest-health-monitor\tests\robot\region_api_tests.robot">
+<kw name="Connect To The Forest API" owner="resources" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-09-02T15:42:56.579280" level="INFO">Creating Session using : alias=forest_api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>forest_api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-09-02T15:42:56.578264" elapsed="0.001529"/>
+</kw>
+<status status="PASS" start="2026-09-02T15:42:56.578264" elapsed="0.001529"/>
+</kw>
+<test id="s1-s1-t1" name="A New Region Can Be Registered Through The API" line="8">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-09-02T15:42:56.582273" level="INFO">${rand} = 7288</msg>
+<var>${rand}</var>
+<arg>random.randint(1000, 9999)</arg>
+<arg>modules=random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.580808" elapsed="0.001465"/>
+</kw>
+<kw name="Register A Test Region" owner="resources">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:56.585011" level="INFO">${p1} = [-122.45, 37.75]</msg>
+<var>${p1}</var>
+<arg>${-122.45}</arg>
+<arg>${37.75}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.583917" elapsed="0.001094"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:56.586110" level="INFO">${p2} = [-122.44, 37.75]</msg>
+<var>${p2}</var>
+<arg>${-122.44}</arg>
+<arg>${37.75}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.585585" elapsed="0.000525"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:56.587996" level="INFO">${p3} = [-122.44, 37.76]</msg>
+<var>${p3}</var>
+<arg>${-122.44}</arg>
+<arg>${37.76}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.586834" elapsed="0.001162"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:56.589106" level="INFO">${p4} = [-122.45, 37.75]</msg>
+<var>${p4}</var>
+<arg>${-122.45}</arg>
+<arg>${37.75}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.587996" elapsed="0.001110"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:56.589644" level="INFO">${ring} = [[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]</msg>
+<var>${ring}</var>
+<arg>${p1}</arg>
+<arg>${p2}</arg>
+<arg>${p3}</arg>
+<arg>${p4}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.589106" elapsed="0.000538"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:56.590225" level="INFO">${coords} = [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]</msg>
+<var>${coords}</var>
+<arg>${ring}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.589644" elapsed="0.000581"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-02T15:42:56.590856" level="INFO">${border} = {'type': 'Polygon', 'coordinates': [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]}</msg>
+<var>${border}</var>
+<arg>type=Polygon</arg>
+<arg>coordinates=${coords}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.590225" elapsed="0.000631"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-02T15:42:56.591847" level="INFO">${request_body} = {'name': 'Robot Test Grove 7288', 'border_shape_geojson': {'type': 'Polygon', 'coordinates': [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]}}</msg>
+<var>${request_body}</var>
+<arg>name=${region_name}</arg>
+<arg>border_shape_geojson=${border}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.591530" elapsed="0.000317"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-09-02T15:42:58.800050" level="INFO">POST Request : url=http://localhost:8000/regions 
+ path_url=/regions 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '169', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Robot Test Grove 7288", "border_shape_geojson": {"type": "Polygon", "coordinates": [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]}}' 
+ </msg>
+<msg time="2026-09-02T15:42:58.800050" level="INFO">POST Response : url=http://localhost:8000/regions 
+ status=201, reason=Created 
+ headers={'date': 'Wed, 02 Sep 2026 12:42:58 GMT', 'server': 'uvicorn', 'content-length': '116', 'content-type': 'application/json'} 
+ body={"id":"e5efd39b-06d6-4560-a224-5a522ff16cdd","name":"Robot Test Grove 7288","added_on":"2026-09-02T12:42:56.767073"} 
+ </msg>
+<msg time="2026-09-02T15:42:58.800050" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>forest_api</arg>
+<arg>/regions</arg>
+<arg>json=${request_body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.592448" elapsed="2.207602"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-02T15:42:58.800050" elapsed="0.000000"/>
+</return>
+<msg time="2026-09-02T15:42:58.800050" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>Robot Test Grove ${rand}</arg>
+<status status="PASS" start="2026-09-02T15:42:56.583282" elapsed="2.216768"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.804101" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.800050" elapsed="0.004051"/>
+</kw>
+<kw name="Should Not Be Empty" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.806209" level="INFO">Length is 36.</msg>
+<arg>${response.json()}[id]</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.805621" elapsed="0.000588"/>
+</kw>
+<status status="PASS" start="2026-09-02T15:42:56.579793" elapsed="2.227434"/>
+</test>
+<test id="s1-s1-t2" name="A Newly Registered Region Shows Up In The Region List" line="14">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.809228" level="INFO">${rand} = 6276</msg>
+<var>${rand}</var>
+<arg>random.randint(1000, 9999)</arg>
+<arg>modules=random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.808227" elapsed="0.001001"/>
+</kw>
+<kw name="Register A Test Region" owner="resources">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.811426" level="INFO">${p1} = [-122.45, 37.75]</msg>
+<var>${p1}</var>
+<arg>${-122.45}</arg>
+<arg>${37.75}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.809740" elapsed="0.001686"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.812445" level="INFO">${p2} = [-122.44, 37.75]</msg>
+<var>${p2}</var>
+<arg>${-122.44}</arg>
+<arg>${37.75}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.811426" elapsed="0.001019"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.813853" level="INFO">${p3} = [-122.44, 37.76]</msg>
+<var>${p3}</var>
+<arg>${-122.44}</arg>
+<arg>${37.76}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.813179" elapsed="0.000674"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.813853" level="INFO">${p4} = [-122.45, 37.75]</msg>
+<var>${p4}</var>
+<arg>${-122.45}</arg>
+<arg>${37.75}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.813853" elapsed="0.000000"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.815420" level="INFO">${ring} = [[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]</msg>
+<var>${ring}</var>
+<arg>${p1}</arg>
+<arg>${p2}</arg>
+<arg>${p3}</arg>
+<arg>${p4}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.813853" elapsed="0.001567"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.816436" level="INFO">${coords} = [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]</msg>
+<var>${coords}</var>
+<arg>${ring}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.815420" elapsed="0.001016"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.816953" level="INFO">${border} = {'type': 'Polygon', 'coordinates': [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]}</msg>
+<var>${border}</var>
+<arg>type=Polygon</arg>
+<arg>coordinates=${coords}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.816436" elapsed="0.000517"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.819841" level="INFO">${request_body} = {'name': 'Robot List Grove 6276', 'border_shape_geojson': {'type': 'Polygon', 'coordinates': [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]}}</msg>
+<var>${request_body}</var>
+<arg>name=${region_name}</arg>
+<arg>border_shape_geojson=${border}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.817270" elapsed="0.002571"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-09-02T15:42:58.841485" level="INFO">POST Request : url=http://localhost:8000/regions 
+ path_url=/regions 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '169', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Robot List Grove 6276", "border_shape_geojson": {"type": "Polygon", "coordinates": [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]}}' 
+ </msg>
+<msg time="2026-09-02T15:42:58.841485" level="INFO">POST Response : url=http://localhost:8000/regions 
+ status=201, reason=Created 
+ headers={'date': 'Wed, 02 Sep 2026 12:42:58 GMT', 'server': 'uvicorn', 'content-length': '116', 'content-type': 'application/json'} 
+ body={"id":"144a3806-3233-4874-8903-bc94de711266","name":"Robot List Grove 6276","added_on":"2026-09-02T12:42:56.767073"} 
+ </msg>
+<msg time="2026-09-02T15:42:58.841485" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>forest_api</arg>
+<arg>/regions</arg>
+<arg>json=${request_body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.819841" elapsed="0.021644"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-02T15:42:58.841485" elapsed="0.000000"/>
+</return>
+<msg time="2026-09-02T15:42:58.841485" level="INFO">${new_region} = &lt;Response [201]&gt;</msg>
+<var>${new_region}</var>
+<arg>Robot List Grove ${rand}</arg>
+<status status="PASS" start="2026-09-02T15:42:58.809740" elapsed="0.031745"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-09-02T15:42:58.865002" level="INFO">GET Request : url=http://localhost:8000/regions 
+ path_url=/regions 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-09-02T15:42:58.866000" level="INFO">GET Response : url=http://localhost:8000/regions 
+ status=200, reason=OK 
+ headers={'date': 'Wed, 02 Sep 2026 12:42:58 GMT', 'server': 'uvicorn', 'content-length': '4042', 'content-type': 'application/json'} 
+ body=[{"id":"a82f22f0-f00e-44d0-9627-c75c4ffebb81","name":"Test Grove 020cf2f1-2836-4f02-9352-18cc021fe50b","added_on":"2026-08-31T15:26:19.234677"},{"id":"2fafbd65-2336-4666-a0b8-0e06c2b7b3c9","name":"Linked Grove aabe07ba-4df6-450e-b15e-13bdd20c1f79","added_on":"2026-08-31T15:26:19.234677"},{"id":"95ff50b1-5075-49d4-a771-a2f52d86fd96","name":"API Test Grove 53cf49fa-b8da-43f1-b8da-20f63e961e17","added_on":"2026-08-31T17:54:33.524181"},{"id":"e589bddf-29ec-4529-9ea5-7152e647760c","name":"Duplicate Grove &lt;function uuid4 at 0x00000215823F5B20&gt;","added_on":"2026-08-31T17:54:33.524181"},{"id":"fa902a01-c8ca-4144-87e9-a74697cf4c5f","name":"API Test Grove c1d2a8a7-735e-4e42-953b-18629cdca733","added_on":"2026-08-31T17:57:02.684435"},{"id":"806e0106-e038-4175-8fd1-c7c21558ffe0","name":"Duplicate Grove &lt;function uuid4 at 0x0000023320065B20&gt;","added_on":"2026-08-31T17:57:02.684435"},{"id":"9a81284d-8d26-41ea-9f0b-0e1f31f3f86e","name":"Robot Test Grove 9264","added_on":"2026-09-02T12:07:38.269546"},{"id":"a2c92638-d06d-49be-9537-68a1f052996a","name":"Robot List Grove 3596","added_on":"2026-09-02T12:07:38.269546"},{"id":"0edb2edd-518c-4337-bb49-75f9a46d3773","name":"Robot Test Grove 4875","added_on":"2026-09-02T12:07:38.269546"},{"id":"77a72591-f251-4dc7-9a6b-ab3807222248","name":"Robot List Grove 9468","added_on":"2026-09-02T12:07:38.269546"},{"id":"e6a9e864-c3be-4171-98ef-c5e69a2ffbce","name":"Robot Test Grove 9486","added_on":"2026-09-02T12:07:38.269546"},{"id":"a7303755-edd8-422b-9f43-7fba16afac1d","name":"Robot List Grove 8301","added_on":"2026-09-02T12:07:38.269546"},{"id":"8b469c74-38c4-4865-bfdd-9247dddc9ebf","name":"Robot Test Grove 4534","added_on":"2026-09-02T12:07:38.269546"},{"id":"de9977e6-dcb8-4ec4-9c60-296f621fc8aa","name":"Robot List Grove 2135","added_on":"2026-09-02T12:07:38.269546"},{"id":"e405b782-51fd-417a-9f2b-b58d2ab0140c","name":"Robot Test Grove 9527","added_on":"2026-09-02T12:07:38.269546"},{"id":"cb7dcd3e-c2dd-4611-bfc2-1291ee7216f9","name":"Robot List Grove 1844","added_on":"2026-09-02T12:07:38.269546"},{"id":"ab823219-e92c-4f91-af71-f79d8d72f6e5","name":"Robot Test Grove 1408","added_on":"2026-09-02T12:24:06.670188"},{"id":"ee9b5f74-1d5d-4bff-bc8c-d1e54da82fbd","name":"Robot List Grove 4069","added_on":"2026-09-02T12:24:06.670188"},{"id":"cfe510b7-ba66-4a64-bda2-25e48bdfd607","name":"Robot Test Grove 9349","added_on":"2026-09-02T12:24:06.670188"},{"id":"953357c0-dced-43c3-b85d-a28cd6a733fa","name":"Robot List Grove 8004","added_on":"2026-09-02T12:24:06.670188"},{"id":"32509443-235a-4612-a819-0c7c36d5c18d","name":"Robot Test Grove 1992","added_on":"2026-09-02T12:24:06.670188"},{"id":"0faf58d3-3123-4f41-bb5d-b226301a4d56","name":"Robot List Grove 5629","added_on":"2026-09-02T12:24:06.670188"},{"id":"7b6570e5-4a09-4416-af87-2f3aac28aed7","name":"Robot Test Grove 4823","added_on":"2026-09-02T12:24:06.670188"},{"id":"a255409b-84a7-483d-8232-674004374d5e","name":"Robot List Grove 6400","added_on":"2026-09-02T12:24:06.670188"},{"id":"e6491867-23b9-4972-9dac-7f1402934b32","name":"Robot Test Grove 2829","added_on":"2026-09-02T12:24:06.670188"},{"id":"547ebf0c-3eb5-423d-8a66-bc254fd7159a","name":"Robot List Grove 8364","added_on":"2026-09-02T12:24:06.670188"},{"id":"34415344-7a81-4a87-a71e-7206f4a0bba1","name":"Robot Test Grove 3535","added_on":"2026-09-02T12:24:06.670188"},{"id":"bbf30688-bf29-4674-86c9-3f357ab80842","name":"Robot List Grove 9032","added_on":"2026-09-02T12:24:06.670188"},{"id":"0e39d1d8-b9e8-4f02-9afc-b6692d547856","name":"Robot Test Grove 6034","added_on":"2026-09-02T12:24:06.670188"},{"id":"ed81cdda-9206-4ed6-bc3d-b4f58d3abfbd","name":"Robot List Grove 9309","added_on":"2026-09-02T12:24:06.670188"},{"id":"69b9e170-b825-43fd-99e2-a9cf95419bd8","name":"Cache Test Grove 4371","added_on":"2026-09-02T12:24:06.670188"},{"id":"e5efd39b-06d6-4560-a224-5a522ff16cdd","name":"Robot Test Grove 7288","added_on":"2026-09-02T12:42:56.767073"},{"id":"144a3806-3233-4874-8903-bc94de711266","name":"Robot List Grove 6276","added_on":"2026-09-02T12:42:56.767073"}] 
+ </msg>
+<msg time="2026-09-02T15:42:58.866000" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>forest_api</arg>
+<arg>/regions</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.841485" elapsed="0.024515"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.868001" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.867001" elapsed="0.001000"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.869515" level="INFO">${names} = []</msg>
+<var>${names}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.869001" elapsed="0.000514"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.870047" elapsed="0.003699"/>
+</kw>
+<var name="${region}">{'id': 'a82f22f0-f00e-44d0-9627-c75c4ffebb81', 'name': 'Test Grove 020cf2f1-2836-4f02-9352-18cc021fe50b', 'added_on': '2026-08-31T15:26:19.234677'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.870047" elapsed="0.004134"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.874181" elapsed="0.000610"/>
+</kw>
+<var name="${region}">{'id': '2fafbd65-2336-4666-a0b8-0e06c2b7b3c9', 'name': 'Linked Grove aabe07ba-4df6-450e-b15e-13bdd20c1f79', 'added_on': '2026-08-31T15:26:19.234677'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.874181" elapsed="0.000610"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.874791" elapsed="0.000567"/>
+</kw>
+<var name="${region}">{'id': '95ff50b1-5075-49d4-a771-a2f52d86fd96', 'name': 'API Test Grove 53cf49fa-b8da-43f1-b8da-20f63e961e17', 'added_on': '2026-08-31T17:54:33.524181'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.874791" elapsed="0.000567"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.875358" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'e589bddf-29ec-4529-9ea5-7152e647760c', 'name': 'Duplicate Grove &lt;function uuid4 at 0x00000215823F5B20&gt;', 'added_on': '2026-08-31T17:54:33.524181'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.875358" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.875868" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'fa902a01-c8ca-4144-87e9-a74697cf4c5f', 'name': 'API Test Grove c1d2a8a7-735e-4e42-953b-18629cdca733', 'added_on': '2026-08-31T17:57:02.684435'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.875868" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.875868" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': '806e0106-e038-4175-8fd1-c7c21558ffe0', 'name': 'Duplicate Grove &lt;function uuid4 at 0x0000023320065B20&gt;', 'added_on': '2026-08-31T17:57:02.684435'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.875868" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.876970" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': '9a81284d-8d26-41ea-9f0b-0e1f31f3f86e', 'name': 'Robot Test Grove 9264', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.876970" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.876970" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'a2c92638-d06d-49be-9537-68a1f052996a', 'name': 'Robot List Grove 3596', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.876970" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.877982" elapsed="0.000303"/>
+</kw>
+<var name="${region}">{'id': '0edb2edd-518c-4337-bb49-75f9a46d3773', 'name': 'Robot Test Grove 4875', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.876970" elapsed="0.001315"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.878982" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': '77a72591-f251-4dc7-9a6b-ab3807222248', 'name': 'Robot List Grove 9468', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.878285" elapsed="0.000697"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.880026" elapsed="0.001577"/>
+</kw>
+<var name="${region}">{'id': 'e6a9e864-c3be-4171-98ef-c5e69a2ffbce', 'name': 'Robot Test Grove 9486', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.880026" elapsed="0.001577"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'a7303755-edd8-422b-9f43-7fba16afac1d', 'name': 'Robot List Grove 8301', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': '8b469c74-38c4-4865-bfdd-9247dddc9ebf', 'name': 'Robot Test Grove 4534', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'de9977e6-dcb8-4ec4-9c60-296f621fc8aa', 'name': 'Robot List Grove 2135', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'e405b782-51fd-417a-9f2b-b58d2ab0140c', 'name': 'Robot Test Grove 9527', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'cb7dcd3e-c2dd-4611-bfc2-1291ee7216f9', 'name': 'Robot List Grove 1844', 'added_on': '2026-09-02T12:07:38.269546'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.881603" elapsed="0.007460"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.889063" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'ab823219-e92c-4f91-af71-f79d8d72f6e5', 'name': 'Robot Test Grove 1408', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.889063" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.889063" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'ee9b5f74-1d5d-4bff-bc8c-d1e54da82fbd', 'name': 'Robot List Grove 4069', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.889063" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.890112" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'cfe510b7-ba66-4a64-bda2-25e48bdfd607', 'name': 'Robot Test Grove 9349', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.889063" elapsed="0.001049"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.890112" elapsed="0.000789"/>
+</kw>
+<var name="${region}">{'id': '953357c0-dced-43c3-b85d-a28cd6a733fa', 'name': 'Robot List Grove 8004', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.890112" elapsed="0.000789"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.890901" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': '32509443-235a-4612-a819-0c7c36d5c18d', 'name': 'Robot Test Grove 1992', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.890901" elapsed="0.000570"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.891471" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': '0faf58d3-3123-4f41-bb5d-b226301a4d56', 'name': 'Robot List Grove 5629', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.891471" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.891471" elapsed="0.000561"/>
+</kw>
+<var name="${region}">{'id': '7b6570e5-4a09-4416-af87-2f3aac28aed7', 'name': 'Robot Test Grove 4823', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.891471" elapsed="0.000561"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.892032" elapsed="0.000570"/>
+</kw>
+<var name="${region}">{'id': 'a255409b-84a7-483d-8232-674004374d5e', 'name': 'Robot List Grove 6400', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.892032" elapsed="0.000570"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.892602" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'e6491867-23b9-4972-9dac-7f1402934b32', 'name': 'Robot Test Grove 2829', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.892602" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.893159" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': '547ebf0c-3eb5-423d-8a66-bc254fd7159a', 'name': 'Robot List Grove 8364', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.892602" elapsed="0.000557"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.893159" elapsed="0.000560"/>
+</kw>
+<var name="${region}">{'id': '34415344-7a81-4a87-a71e-7206f4a0bba1', 'name': 'Robot Test Grove 3535', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.893159" elapsed="0.000560"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.893719" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'bbf30688-bf29-4674-86c9-3f357ab80842', 'name': 'Robot List Grove 9032', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.893719" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.894243" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': '0e39d1d8-b9e8-4f02-9afc-b6692d547856', 'name': 'Robot Test Grove 6034', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.893719" elapsed="0.000524"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.894243" elapsed="0.000651"/>
+</kw>
+<var name="${region}">{'id': 'ed81cdda-9206-4ed6-bc3d-b4f58d3abfbd', 'name': 'Robot List Grove 9309', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.894243" elapsed="0.000651"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.894894" elapsed="0.000595"/>
+</kw>
+<var name="${region}">{'id': '69b9e170-b825-43fd-99e2-a9cf95419bd8', 'name': 'Cache Test Grove 4371', 'added_on': '2026-09-02T12:24:06.670188'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.894894" elapsed="0.000935"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.895829" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': 'e5efd39b-06d6-4560-a224-5a522ff16cdd', 'name': 'Robot Test Grove 7288', 'added_on': '2026-09-02T12:42:56.767073'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.895829" elapsed="0.000000"/>
+</iter>
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${names}</arg>
+<arg>${region}[name]</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.895829" elapsed="0.000000"/>
+</kw>
+<var name="${region}">{'id': '144a3806-3233-4874-8903-bc94de711266', 'name': 'Robot List Grove 6276', 'added_on': '2026-09-02T12:42:56.767073'}</var>
+<status status="PASS" start="2026-09-02T15:42:58.895829" elapsed="0.000000"/>
+</iter>
+<var>${region}</var>
+<value>@{response.json()}</value>
+<status status="PASS" start="2026-09-02T15:42:58.870047" elapsed="0.025782"/>
+</for>
+<kw name="List Should Contain Value" owner="Collections">
+<arg>${names}</arg>
+<arg>${new_region.json()}[name]</arg>
+<doc>Fails if the ``value`` is not found from ``list``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.895829" elapsed="0.004229"/>
+</kw>
+<status status="PASS" start="2026-09-02T15:42:58.807227" elapsed="0.092831"/>
+</test>
+<doc>These tests check the API from outside, like a real user would.</doc>
+<status status="PASS" start="2026-09-02T15:42:56.169274" elapsed="2.730784"/>
+</suite>
+<suite id="s1-s2" name="Region Cache Tests" source="C:\xampp\htdocs\forest-health-monitor\tests\robot\region_cache_tests.robot">
+<kw name="Connect To The Forest API" owner="resources" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-09-02T15:42:58.910447" level="INFO">Creating Session using : alias=forest_api, url=http://localhost:8000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>forest_api</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-09-02T15:42:58.910447" elapsed="0.000000"/>
+</kw>
+<status status="PASS" start="2026-09-02T15:42:58.909060" elapsed="0.001387"/>
+</kw>
+<test id="s1-s2-t1" name="Asking for the same region twice gives the same answer" line="8">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.916328" level="INFO">${rand} = 5501</msg>
+<var>${rand}</var>
+<arg>random.randint(1000, 9999)</arg>
+<arg>modules=random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.912069" elapsed="0.004259"/>
+</kw>
+<kw name="Register A Test Region" owner="resources">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.921907" level="INFO">${p1} = [-122.45, 37.75]</msg>
+<var>${p1}</var>
+<arg>${-122.45}</arg>
+<arg>${37.75}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.919399" elapsed="0.002508"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.924288" level="INFO">${p2} = [-122.44, 37.75]</msg>
+<var>${p2}</var>
+<arg>${-122.44}</arg>
+<arg>${37.75}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.922508" elapsed="0.001780"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.925370" level="INFO">${p3} = [-122.44, 37.76]</msg>
+<var>${p3}</var>
+<arg>${-122.44}</arg>
+<arg>${37.76}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.924288" elapsed="0.001082"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.925989" level="INFO">${p4} = [-122.45, 37.75]</msg>
+<var>${p4}</var>
+<arg>${-122.45}</arg>
+<arg>${37.75}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.925370" elapsed="0.000619"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.926553" level="INFO">${ring} = [[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]</msg>
+<var>${ring}</var>
+<arg>${p1}</arg>
+<arg>${p2}</arg>
+<arg>${p3}</arg>
+<arg>${p4}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.926553" elapsed="0.000000"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.927236" level="INFO">${coords} = [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]</msg>
+<var>${coords}</var>
+<arg>${ring}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.926553" elapsed="0.000683"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.930059" level="INFO">${border} = {'type': 'Polygon', 'coordinates': [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]}</msg>
+<var>${border}</var>
+<arg>type=Polygon</arg>
+<arg>coordinates=${coords}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.927236" elapsed="0.002823"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-09-02T15:42:58.934139" level="INFO">${request_body} = {'name': 'Cache Test Grove 5501', 'border_shape_geojson': {'type': 'Polygon', 'coordinates': [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]}}</msg>
+<var>${request_body}</var>
+<arg>name=${region_name}</arg>
+<arg>border_shape_geojson=${border}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.932774" elapsed="0.001365"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-09-02T15:43:01.002926" level="INFO">POST Request : url=http://localhost:8000/regions 
+ path_url=/regions 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '169', 'Content-Type': 'application/json'} 
+ body=b'{"name": "Cache Test Grove 5501", "border_shape_geojson": {"type": "Polygon", "coordinates": [[[-122.45, 37.75], [-122.44, 37.75], [-122.44, 37.76], [-122.45, 37.75]]]}}' 
+ </msg>
+<msg time="2026-09-02T15:43:01.008499" level="INFO">POST Response : url=http://localhost:8000/regions 
+ status=201, reason=Created 
+ headers={'date': 'Wed, 02 Sep 2026 12:43:00 GMT', 'server': 'uvicorn', 'content-length': '116', 'content-type': 'application/json'} 
+ body={"id":"ddd6722f-3129-4856-a10f-1f3ec01a5dfb","name":"Cache Test Grove 5501","added_on":"2026-09-02T12:42:56.767073"} 
+ </msg>
+<msg time="2026-09-02T15:43:01.008499" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>forest_api</arg>
+<arg>/regions</arg>
+<arg>json=${request_body}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.934139" elapsed="2.074360"/>
+</kw>
+<return>
+<value>${response}</value>
+<status status="PASS" start="2026-09-02T15:43:01.008499" elapsed="0.000520"/>
+</return>
+<msg time="2026-09-02T15:43:01.009019" level="INFO">${created} = &lt;Response [201]&gt;</msg>
+<var>${created}</var>
+<arg>Cache Test Grove ${rand}</arg>
+<status status="PASS" start="2026-09-02T15:42:58.918370" elapsed="2.090649"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-09-02T15:43:01.011685" level="INFO">${region_id} = ddd6722f-3129-4856-a10f-1f3ec01a5dfb</msg>
+<var>${region_id}</var>
+<arg>${created.json()}[id]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-09-02T15:43:01.009019" elapsed="0.002666"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-09-02T15:43:01.113252" level="INFO">GET Request : url=http://localhost:8000/regions/ddd6722f-3129-4856-a10f-1f3ec01a5dfb 
+ path_url=/regions/ddd6722f-3129-4856-a10f-1f3ec01a5dfb 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-09-02T15:43:01.113252" level="INFO">GET Response : url=http://localhost:8000/regions/ddd6722f-3129-4856-a10f-1f3ec01a5dfb 
+ status=200, reason=OK 
+ headers={'date': 'Wed, 02 Sep 2026 12:43:00 GMT', 'server': 'uvicorn', 'content-length': '116', 'content-type': 'application/json'} 
+ body={"id":"ddd6722f-3129-4856-a10f-1f3ec01a5dfb","name":"Cache Test Grove 5501","added_on":"2026-09-02T12:42:56.767073"} 
+ </msg>
+<msg time="2026-09-02T15:43:01.113252" level="INFO">${first_answer} = &lt;Response [200]&gt;</msg>
+<var>${first_answer}</var>
+<arg>forest_api</arg>
+<arg>/regions/${region_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-02T15:43:01.011685" elapsed="0.101567"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-09-02T15:43:01.128856" level="INFO">GET Request : url=http://localhost:8000/regions/ddd6722f-3129-4856-a10f-1f3ec01a5dfb 
+ path_url=/regions/ddd6722f-3129-4856-a10f-1f3ec01a5dfb 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-09-02T15:43:01.128856" level="INFO">GET Response : url=http://localhost:8000/regions/ddd6722f-3129-4856-a10f-1f3ec01a5dfb 
+ status=200, reason=OK 
+ headers={'date': 'Wed, 02 Sep 2026 12:43:00 GMT', 'server': 'uvicorn', 'content-length': '116', 'content-type': 'application/json'} 
+ body={"id":"ddd6722f-3129-4856-a10f-1f3ec01a5dfb","name":"Cache Test Grove 5501","added_on":"2026-09-02T12:42:56.767073"} 
+ </msg>
+<msg time="2026-09-02T15:43:01.129373" level="INFO">${second_answer} = &lt;Response [200]&gt;</msg>
+<var>${second_answer}</var>
+<arg>forest_api</arg>
+<arg>/regions/${region_id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-02T15:43:01.115300" elapsed="0.014073"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-02T15:43:01.132500" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${first_answer.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-02T15:43:01.129985" elapsed="0.003240"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-02T15:43:01.135834" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${second_answer.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-02T15:43:01.134209" elapsed="0.001930"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${first_answer.json()}[name]</arg>
+<arg>${second_answer.json()}[name]</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-09-02T15:43:01.136139" elapsed="0.003014"/>
+</kw>
+<status status="PASS" start="2026-09-02T15:42:58.910447" elapsed="2.229221"/>
+</test>
+<test id="s1-s2-t2" name="Looking up a region that does not exists returns not found" line="20">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2026-09-02T15:43:01.189731" level="INFO">GET Request : url=http://localhost:8000/regions/00000000-0000-0000-0000-000000000000 
+ path_url=/regions/00000000-0000-0000-0000-000000000000 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2026-09-02T15:43:01.189731" level="INFO">GET Response : url=http://localhost:8000/regions/00000000-0000-0000-0000-000000000000 
+ status=404, reason=Not Found 
+ headers={'date': 'Wed, 02 Sep 2026 12:43:00 GMT', 'server': 'uvicorn', 'content-length': '29', 'content-type': 'application/json'} 
+ body={"detail":"Region not found"} 
+ </msg>
+<msg time="2026-09-02T15:43:01.189731" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<var>${response}</var>
+<arg>forest_api</arg>
+<arg>/regions/00000000-0000-0000-0000-000000000000</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-09-02T15:43:01.155349" elapsed="0.034920"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-09-02T15:43:01.192093" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>404</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-09-02T15:43:01.190269" elapsed="0.001824"/>
+</kw>
+<status status="PASS" start="2026-09-02T15:43:01.147329" elapsed="0.045651"/>
+</test>
+<doc>Checks that asking for the same region twice still works,
+and gives the same answer both times, using the cache.</doc>
+<status status="PASS" start="2026-09-02T15:42:58.901729" elapsed="2.292427"/>
+</suite>
+<status status="PASS" start="2026-09-02T15:42:56.001511" elapsed="5.194489"/>
+</suite>
+<statistics>
+<total>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Robot" id="s1" pass="4" fail="0" skip="0">Robot</stat>
+<stat name="Region Api Tests" id="s1-s1" pass="2" fail="0" skip="0">Robot.Region Api Tests</stat>
+<stat name="Region Cache Tests" id="s1-s2" pass="2" fail="0" skip="0">Robot.Region Cache Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

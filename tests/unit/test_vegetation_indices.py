@@ -5,7 +5,7 @@ from src.processing.vegetation_indices import (
     calculate_burn_severity,
     calculate_moister_stress,
     calculate_canopy_density,
-    summarize_all_health_indicates
+    summarize_all_health_indices
 )
 
 def test_healthy_plant_has_high_greenness_score():

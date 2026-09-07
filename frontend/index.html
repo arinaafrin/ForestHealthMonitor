@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    Content-Security-Policy: tells the browser exactly which sources are
+    allowed to run. This is a real security control — if any malicious
+    script ever got injected (e.g. through a bad dependency), the browser
+    would refuse to run it unless it came from these exact places.
+  -->
+  <meta http-equiv="Content-Security-Policy" content="
+    default-src 'self';
+    style-src 'self' 'unsafe-inline' https://unpkg.com;
+    img-src 'self' data: https://*.tile.openstreetmap.org;
+    connect-src 'self' http://localhost:8000 https://nominatim.openstreetmap.org https://openstreetmap.org;
+    script-src 'self';
+  " />
+
+  <title>Forest Health Monitor</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

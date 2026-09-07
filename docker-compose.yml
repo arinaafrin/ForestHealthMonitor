@@ -1,6 +1,6 @@
 services:
   forest_database:
-    image: postgis/postgis:16-3.4
+    image: postgis/postgis:15-3.3
     restart: unless-stopped
     environment:
       POSTGRES_USER: forest
@@ -11,6 +11,56 @@ services:
     volumes:
       # keeps data safe after restart
       - forest_db_data:/var/lib/postgresql/data 
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U forest -d forest_health"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  forest_cache:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      
+  forest_api:
+    build: .
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_HOST: forest_database
+      DATABASE_PORT: 5432
+      REDIS_HOST: forest_cache
+      REDIS_PORT: 6379
+      DATABASE_URL: postgresql://forest:forest@forest_database:5432/forest_health
+      REDIS_URL: redis://forest_cache:6379/0
+    depends_on:
+      forest_database:
+        condition: service_healthy
+      forest_cache:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    volumes:
+      # - ./credentials:/app/credentials
+      - .:/app
+      - /app/.venv
+  
+  forest_web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      forest_api:
+        condition: service_healthy
 
 volumes:
   forest_db_data:

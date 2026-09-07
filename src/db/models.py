@@ -15,11 +15,19 @@ class DatabaseBase(DeclarativeBase):
     pass
 
 class ForestHealthStatus(str, enum.Enum):
-    HEALTH = "health"
+    HEALTHY = "healthy"
     MODERATE_STRESS = "moderate_stress"
     SEVERE_STRESS = "severe_stress"
     UNKNOWN = "unknown"
+class User(DatabaseBase):
+    """ one person who can log in and register forests """
+    __tablename__ = "users"
 
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    email = Column(String(255), nullable=False, unique=True)
+    scrambled_password = Column(String(255), nullable=False)
+    joined_on = Column(DateTime, default=datetime.utcnow)
+    
 class ForestRegion(DatabaseBase):
     """ One forest area the user is tracking """
     __tablename__ = "forest_regions"
@@ -55,7 +63,15 @@ class HealthAssessment(DatabaseBase):
     id                 = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     satellite_check_id = Column(UUID(as_uuid=True), ForeignKey("satellite_checks.id"), nullable=False)
 
-    status                 = Column(Enum(ForestHealthStatus), nullable=False, default=ForestHealthStatus.UNKNOWN)
+    status             = Column(
+                            Enum(
+                                ForestHealthStatus,
+                                name="foresthealthstatus",
+                                values_callable=lambda enum_class: [member.value for member in enum_class],
+                            ),
+                            nullable=False,
+                            default=ForestHealthStatus.UNKNOWN,
+                        )
     steps_away_from_normal = Column(Float, nullable=False)
     decided_on             = Column(DateTime, default=datetime.now(timezone.utc))
 

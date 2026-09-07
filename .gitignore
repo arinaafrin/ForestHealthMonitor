@@ -1,3 +1,5 @@
+# ----------------- Backend specific ------------------
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -63,3 +65,37 @@ docker-data/
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# Inside Credentials Folder
+credentials/
+*.json
+!.eslintrc.json
+!package.json
+
+# ----------------- Frontend specific ------------------
+
+# Dependency Lock
+frontend/node_modules/
+
+# Local Environment Records
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local
+
+# Production Build Artifacts & Distribution Folders
+frontend/dist/
+frontend/build/
+frontend/out/
+frontend/.next/
+
+# Patch files & Temporary logs
+frontend/*.patch
+frontend/*.log
+frontend/.eslintcache
+
+# Lockfile Safeguards
+frontend/package-lock.json
+frontend/pnpm-lock.yaml
+
+
