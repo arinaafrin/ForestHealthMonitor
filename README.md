@@ -15,50 +15,52 @@ Forest Health Monitor is a full-stack system that checks forest condition using 
 
 ## System Architecture
 
-Browser
-  │
-  ▼
-┌─────────────┐ /api/*            ┌──────────────┐
-│ forest_web  │ ───────────────▶ │ forest_api    │
-│ (Nginx + │  │                   | (FastAPI +   │      
-│ React app)  │                   │ Gunicorn)    │
-└─────────────┘                   └──────┬───────┘
+```
+  Browser
+     │
+     ▼
+┌─────────────┐      /api/*      ┌─────────────┐
+│  forest_web │ ──────────────▶  │ forest_api  │
+│  (Nginx +   │                  │  (FastAPI + │
+│  React app) │                  │   Gunicorn) │
+└─────────────┘                  └──────┬──────┘
                                          │
                     ┌────────────────────┼───────────────────┐
-                    ▼                    ▼                   ▼
-               ┌─────────────┐ ┌───────────────┐ ┌──────────────┐
-               │forest_cache │ │forest_database│ │ Google Earth │
-               │ (Redis)     │ │ (PostGIS)     │ │ Engine       │
-               └─────────────┘ └───────────────┘ └──────────────┘
-
+                    ▼                    ▼                    ▼
+             ┌─────────────┐     ┌──────────────┐     ┌──────────────┐
+             │forest_cache │     │forest_database│     │ Google Earth │
+             │  (Redis)    │     │  (PostGIS)    │     │   Engine     │
+             └─────────────┘     └──────────────┘     └──────────────┘
+```
 
 Only the frontend/proxy is internet-facing. The database, cache, and API communicate over a private Docker network.
 
 ## Project Structure
 
+```
 forest-health-monitor/
-├── Dockerfile # Backend image (FastAPI + Gunicorn)
-├── docker-compose.yml # Orchestrates all 4 services
+├── Dockerfile                  # Backend image (FastAPI + Gunicorn)
+├── docker-compose.yml          # Orchestrates all 4 services
 ├── requirements.txt
 ├── src/
-│ ├── api/ # FastAPI routes, schemas, health check service
-│ ├── db/ # SQLAlchemy models & session
-│ ├── processing/ # Vegetation index math & anomaly detection
-│ ├── ingestion/ # Google Earth Engine client
-│ ├── cache/ # Redis client
-│ └── reporting/ # PDF report generation
+│   ├── api/                    # FastAPI routes, schemas, health check service
+│   ├── db/                     # SQLAlchemy models & session
+│   ├── processing/             # Vegetation index math & anomaly detection
+│   ├── ingestion/              # Google Earth Engine client
+│   ├── cache/                  # Redis client
+│   └── reporting/              # PDF report generation
 ├── frontend/
-│ ├── Dockerfile # Frontend image (Nginx + built React app)
-│ ├── nginx.conf
-│ └── src/
-│ ├── pages/ # Dashboard, About
-│ ├── components/ # MapDrawer, charts, badges
-│ └── api/ # API client
+│   ├── Dockerfile              # Frontend image (Nginx + built React app)
+│   ├── nginx.conf
+│   └── src/
+│       ├── pages/               # Dashboard, About
+│       ├── components/          # MapDrawer, charts, badges
+│       └── api/                 # API client
 ├── tests/
-│ ├── unit/
-│ └── integration/
-└── .github/workflows/ # CI/CD pipeline
-
+│   ├── unit/
+│   └── integration/
+└── .github/workflows/           # CI/CD pipeline
+```
 
 ## Tech Stack
 
@@ -84,26 +86,26 @@ forest-health-monitor/
 ## Quick Start
 
 1. **Clone the repository:**
-```bash
+   ```bash
    git clone https://github.com/arinaafrin/ForestHealthMonitor.git
    cd ForestHealthMonitor
-```
+   ```
 
 2. **Set up environment variables:**
    Create a `.env` file at the project root with your database, Redis, and Earth Engine credentials.
 
 3. **Start all services:**
-```bash
+   ```bash
    docker compose up -d --build
-```
+   ```
 
 4. **Open the app:**
    Visit `http://localhost` for the dashboard.
 
 5. **Check the API directly (optional):**
-```bash
+   ```bash
    curl http://localhost/api/health
-```
+   ```
 
 ## Running Tests
 
@@ -125,17 +127,18 @@ DATABASE_HOST=localhost REDIS_HOST=localhost REDIS_PORT=6380 pytest tests/ -v
 
 ## Screenshots
 
-![Dashboard](docs/screenshots/dashboard.png)
+![Dashboard](docs/screenshots/dashboard_one.png)
+![Dashboard](docs/screenshots/dashboard_two.png)
 *Drawing a forest boundary and running a health check*
 
-![Trend Chart](docs/screenshots/trend-chart.png)
+![Trend Chart](docs/screenshots/result_one.png)
+![Trend Chart](docs/screenshots/result_two.png)
 *Tracking vegetation health over time*
 
-![About Page](docs/screenshots/about-page.png)
-*Project overview and system architecture*
-
 ## Future Work
+
 JWT authentication, NDVI heatmap overlays, scheduled automatic checks, and an alerts system for regions that turn unhealthy. See the in-app About page for the full roadmap.
 
 ## License
+
 MIT
