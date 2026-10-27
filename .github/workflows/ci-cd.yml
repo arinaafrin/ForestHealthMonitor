@@ -19,6 +19,19 @@ jobs:
         run: pip install -r requirements.txt pytest
       - name: Run the fast tests (no Docker needed)
         run: pytest tests/unit -v
+  run_mining_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install CPU PyTorch first (keeps the download small)
+        run: pip install torch --index-url https://download.pytorch.org/whl/cpu
+      - name: Install the other packages
+        run: pip install -r requirements-mining.txt pytest
+      - name: Run the mining tests (no internet, no Earth Engine)
+        run: pytest tests/unit/mining -v
 
   run_full_system_tests:
     runs-on: ubuntu-latest

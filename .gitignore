@@ -89,3 +89,9 @@ frontend/.next/
 frontend/*.patch
 frontend/*.log
 frontend/.eslintcache
+
+# ----------------- Mining segmentation extension ------------------
+data/
+runs/
+*.pt
+*.npz.venv/
