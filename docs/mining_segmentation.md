@@ -126,20 +126,76 @@ even one pixel is marked, so check the predicted percentage as well.
 
 | Patch | Country | Type | Label % | Predicted % | IoU | What the picture shows |
 |---|---|---|---|---|---|---|
-| pos_00069 | MWI | mine | 0.8 | 0.0 | 0.000 | (add after checking) |
-| pos_00107 | MEX | mine | 8.9 | 0.0 | 0.000 | (add after checking) |
-| pos_00134 | MAR | mine | 5.8 | 0.0 | 0.000 | (add after checking) |
-| pos_00197 | SLV | mine | 1.3 | 0.0 | 0.000 | (add after checking) |
-| pos_00227 | AFG | mine | 2.3 | 2.5 | 0.000 | (add after checking) |
-| neg_00008 | IRN | negative | 0.0 | 13.0 | 0.000 | (add after checking) |
-| neg_00041 | IND | negative | 0.0 | 0.4 | 0.000 | (add after checking) |
-| neg_00051 | BFA | negative | 0.0 | 60.7 | 0.000 | (add after checking) |
+| pos_00069 | MWI | mine | 0.8 | 0.0 | 0.000 | see Pictures below |
+| pos_00107 | MEX | mine | 8.9 | 0.0 | 0.000 | see Pictures below |
+| pos_00134 | MAR | mine | 5.8 | 0.0 | 0.000 | see Pictures below |
+| pos_00197 | SLV | mine | 1.3 | 0.0 | 0.000 | see Pictures below |
+| pos_00227 | AFG | mine | 2.3 | 2.5 | 0.000 | see Pictures below |
+| neg_00008 | IRN | negative | 0.0 | 13.0 | 0.000 | see Pictures below |
+| neg_00041 | IND | negative | 0.0 | 0.4 | 0.000 | see Pictures below |
+| neg_00051 | BFA | negative | 0.0 | 60.7 | 0.000 | see Pictures below |
 
 Facts from the table: three of the five worst mapped-mine patches have labels
 covering less than 3% of the patch. In `pos_00227` the model marked about the
 right amount (2.5% against 2.3%) but in the wrong place. Two negative patches
 have large marked areas (13% and 60.7%); each is either an unmapped mine or a
 real false alarm, and the picture has to decide which.
+
+## Pictures
+
+Each picture shows the Sentinel-2 image (left), the label (middle) and the
+prediction (right). Seed 1, threshold 0.5.
+
+### pos_00069 (MWI, mine; label 0.8%, predicted 0.0%)
+
+![pos_00069](figures/mining/pos_00069.png)
+
+Note: TODO
+
+### pos_00107 (MEX, mine; label 8.9%, predicted 0.0%)
+
+![pos_00107](figures/mining/pos_00107.png)
+
+Note: TODO
+
+### pos_00134 (MAR, mine; label 5.8%, predicted 0.0%)
+
+![pos_00134](figures/mining/pos_00134.png)
+
+Note: TODO
+
+### pos_00197 (SLV, mine; label 1.3%, predicted 0.0%)
+
+![pos_00197](figures/mining/pos_00197.png)
+
+Note: TODO
+
+### pos_00227 (AFG, mine; label 2.3%, predicted 2.5%)
+
+![pos_00227](figures/mining/pos_00227.png)
+
+Note: TODO
+
+### neg_00008 (IRN, negative; label 0.0%, predicted 13.0%)
+
+![neg_00008](figures/mining/neg_00008.png)
+
+Note: TODO
+
+### neg_00041 (IND, negative; label 0.0%, predicted 0.4%)
+
+![neg_00041](figures/mining/neg_00041.png)
+
+Note: TODO
+
+### neg_00051 (BFA, negative; label 0.0%, predicted 60.7%)
+
+![neg_00051](figures/mining/neg_00051.png)
+
+Note: TODO
+
+Contains modified Copernicus Sentinel data 2019. Labels: Maus et al. (2022),
+CC BY-SA 4.0.
 
 ## What these results support
 
