@@ -142,3 +142,7 @@ JWT authentication, NDVI heatmap overlays, scheduled automatic checks, and an al
 ## License
 
 MIT
+
+## Extension: mining-area segmentation
+
+A Sentinel-2 U-Net baseline with spatial train/validation/test splits lives in `src/mining/`. On 74 held-out test patches it reaches an IoU of about 0.34 (95% interval 0.27 to 0.41), against 0.15 for an all-mine guess. The limits, results and failure analysis are in [docs/mining_segmentation.md](docs/mining_segmentation.md).
